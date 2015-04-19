@@ -1,4 +1,5 @@
 #include <pebble.h>
+#include "localize.h"
 
 static Window *s_main_window;
 static TextLayer *s_time_layer;
@@ -15,7 +16,7 @@ static void update_time() {
   
   if(hour >= 21) {
 	  text_layer_set_text(s_ampm_layer, " ");
-	  text_layer_set_text(s_time_layer, "night");
+	  text_layer_set_text(s_time_layer, _("night"));
 #ifdef PBL_COLOR
 	  window_set_background_color(s_main_window, GColorBlack);
 	  text_layer_set_text_color(s_ampm_layer, GColorWhite);
@@ -29,7 +30,7 @@ static void update_time() {
 #endif
   } else if(hour >= 18) {
 	  text_layer_set_text(s_ampm_layer, " ");
-	  text_layer_set_text(s_time_layer, "evening");
+	  text_layer_set_text(s_time_layer, _("evening"));
 #ifdef PBL_COLOR
 	  window_set_background_color(s_main_window, GColorOxfordBlue);
 	  text_layer_set_text_color(s_ampm_layer, GColorWhite);
@@ -42,8 +43,8 @@ static void update_time() {
 	  text_layer_set_text_color(s_date_layer, GColorWhite);
 #endif
   } else if(hour >= 15) {
-	  text_layer_set_text(s_ampm_layer, "late");
-	  text_layer_set_text(s_time_layer, "afternoon");
+	  text_layer_set_text(s_ampm_layer, _("late"));
+	  text_layer_set_text(s_time_layer, _("afternoon"));
 #ifdef PBL_COLOR
 	  window_set_background_color(s_main_window, GColorSunsetOrange);
 	  text_layer_set_text_color(s_ampm_layer, GColorWhite);
@@ -57,7 +58,7 @@ static void update_time() {
 #endif
   } else if(hour >= 12) {
 	  text_layer_set_text(s_ampm_layer, " ");
-	  text_layer_set_text(s_time_layer, "afternoon");
+	  text_layer_set_text(s_time_layer, _("afternoon"));
 #ifdef PBL_COLOR
 	  window_set_background_color(s_main_window, GColorVividCerulean);
 	  text_layer_set_text_color(s_ampm_layer, GColorWhite);
@@ -70,8 +71,8 @@ static void update_time() {
 	  text_layer_set_text_color(s_date_layer, GColorBlack);
 #endif
   } else if(hour >= 9) {
-	  text_layer_set_text(s_ampm_layer, "late");
-	  text_layer_set_text(s_time_layer, "morning");
+	  text_layer_set_text(s_ampm_layer, _("late"));
+	  text_layer_set_text(s_time_layer, _("morning"));
 #ifdef PBL_COLOR
 	  window_set_background_color(s_main_window, GColorVividCerulean);
 	  text_layer_set_text_color(s_ampm_layer, GColorWhite);
@@ -85,7 +86,7 @@ static void update_time() {
 #endif
   } else if(hour >= 6) {
 	  text_layer_set_text(s_ampm_layer, " ");
-	  text_layer_set_text(s_time_layer, "morning");
+	  text_layer_set_text(s_time_layer, _("morning"));
 #ifdef PBL_COLOR
 	  window_set_background_color(s_main_window, GColorVividCerulean);
 	  text_layer_set_text_color(s_ampm_layer, GColorWhite);
@@ -98,8 +99,8 @@ static void update_time() {
 	  text_layer_set_text_color(s_date_layer, GColorBlack);
 #endif
   } else if(hour >= 3) {
-	  text_layer_set_text(s_ampm_layer, "early");
-	  text_layer_set_text(s_time_layer, "morning");
+	  text_layer_set_text(s_ampm_layer, _("early"));
+	  text_layer_set_text(s_time_layer, _("morning"));
 #ifdef PBL_COLOR
 	  window_set_background_color(s_main_window, GColorBabyBlueEyes);
 	  text_layer_set_text_color(s_ampm_layer, GColorWhite);
@@ -113,7 +114,7 @@ static void update_time() {
 #endif
   } else if(hour >= 0) {
 	  text_layer_set_text(s_ampm_layer, " ");
-	  text_layer_set_text(s_time_layer, "midnight");
+	  text_layer_set_text(s_time_layer, _("midnight"));
 #ifdef PBL_COLOR
 	  window_set_background_color(s_main_window, GColorBlack);
 	  text_layer_set_text_color(s_ampm_layer, GColorWhite);
@@ -150,6 +151,8 @@ static void update_time() {
 }
 
 static void main_window_load(Window *window) {
+	setlocale(LC_ALL, "");
+	
 	
 	s_time_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_CYNTHE_28));
 	s_date_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_CYNTHE_18));
@@ -189,6 +192,8 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
 
 static void init() {
   s_main_window = window_create();
+	
+	locale_init();
 
   window_set_window_handlers(s_main_window, (WindowHandlers) {
     .load = main_window_load,
