@@ -1,7 +1,16 @@
 {
-    "appKeys": {},
+    "appKeys": {
+        "KEY_CONDITIONS": 0,
+        "KEY_CONDITIONSH": 6,
+        "KEY_SCALE": 3,
+        "KEY_TEMPERATURE": 1,
+        "KEY_TEMPERATUREC": 2,
+        "KEY_TEMPERATUREH": 4,
+        "KEY_TEMPERATUREHC": 5
+    },
     "capabilities": [
-        ""
+        "location",
+        "configurable"
     ],
     "companyName": "Turner Vink",
     "longName": "Vacation Time",
@@ -10,12 +19,22 @@
         "media": [
             {
                 "file": "fonts/cynthe.ttf",
-                "name": "FONT_CYNTHE_18",
+                "name": "FONT_CYNTHE_14",
                 "type": "font"
             },
             {
                 "file": "fonts/cynthe.ttf",
-                "name": "FONT_CYNTHE_28",
+                "name": "FONT_CYNTHE_25",
+                "type": "font"
+            },
+            {
+                "file": "fonts/cynthe.ttf",
+                "name": "FONT_CYNTHE_22",
+                "type": "font"
+            },
+            {
+                "file": "fonts/cynthe.ttf",
+                "name": "FONT_CYNTHE_18",
                 "type": "font"
             }
         ]
@@ -27,7 +46,6 @@
         "basalt"
     ],
     "uuid": "cd8dcffe-df20-4306-99e8-ddd817d0bf67",
-    "versionCode": 1,
     "versionLabel": "1.0",
     "watchapp": {
         "watchface": true
