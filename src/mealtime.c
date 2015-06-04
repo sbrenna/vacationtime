@@ -5,10 +5,11 @@
 #define KEY_TEMPERATURE 1
 #define KEY_TEMPERATUREC 2
 #define KEY_SCALE 3
+#define KEY_FORECASTC 7
 
 static Window *s_main_window;
-static TextLayer *s_time_layer, *s_ampm_layer, *s_date_layer, *s_weather_layer, *s_temp_layer, *s_digit_h;
-static GFont s_time_font, s_date_font, s_weather_font, s_temp_font;
+static TextLayer *s_time_layer, *s_ampm_layer, *s_date_layer, *s_weather_layer, *s_temp_layer, *s_digit_h, *s_forecast_layer;
+static GFont s_time_font, s_date_font, s_weather_font, s_temp_font, s_digit_font, s_forecast_font;
 static Layer *batt_layer;
 static char hour_buffer[25];
 static int digit_m_1 = 0;
@@ -73,6 +74,7 @@ static void update_time() {
 		text_layer_set_text_color(s_temp_layer, GColorWhite);
 		text_layer_set_text_color(s_weather_layer, GColorWhite);
     text_layer_set_text_color(s_digit_h, GColorWhite);
+    text_layer_set_text_color(s_forecast_layer, GColorWhite);
 #else
 	  window_set_background_color(s_main_window, GColorBlack);
 	  text_layer_set_text_color(s_ampm_layer, GColorWhite);
@@ -81,6 +83,7 @@ static void update_time() {
 		text_layer_set_text_color(s_temp_layer, GColorWhite);
 		text_layer_set_text_color(s_weather_layer, GColorWhite);
     text_layer_set_text_color(s_digit_h, GColorWhite);
+    text_layer_set_text_color(s_forecast_layer, GColorWhite);
 #endif
   } else if(hour >= 18) {
 	  text_layer_set_text(s_ampm_layer, " ");
@@ -93,6 +96,7 @@ static void update_time() {
 		text_layer_set_text_color(s_temp_layer, GColorWhite);
 		text_layer_set_text_color(s_weather_layer, GColorWhite);
     text_layer_set_text_color(s_digit_h, GColorWhite);
+    text_layer_set_text_color(s_forecast_layer, GColorWhite);
 #else
 	  window_set_background_color(s_main_window, GColorBlack);
 	  text_layer_set_text_color(s_ampm_layer, GColorWhite);
@@ -101,6 +105,7 @@ static void update_time() {
 		text_layer_set_text_color(s_temp_layer, GColorWhite);
 		text_layer_set_text_color(s_weather_layer, GColorWhite);
     text_layer_set_text_color(s_digit_h, GColorWhite);
+    text_layer_set_text_color(s_forecast_layer, GColorWhite);
 #endif
   } else if(hour >= 15) {
 	  text_layer_set_text(s_ampm_layer, "late");
@@ -113,6 +118,7 @@ static void update_time() {
 		text_layer_set_text_color(s_temp_layer, GColorWhite);
 		text_layer_set_text_color(s_weather_layer, GColorWhite);
     text_layer_set_text_color(s_digit_h, GColorWhite);
+    text_layer_set_text_color(s_forecast_layer, GColorWhite);
 #else
 	  window_set_background_color(s_main_window, GColorWhite);
 	  text_layer_set_text_color(s_ampm_layer, GColorBlack);
@@ -121,6 +127,7 @@ static void update_time() {
 		text_layer_set_text_color(s_temp_layer, GColorBlack);
 		text_layer_set_text_color(s_weather_layer, GColorBlack);
     text_layer_set_text_color(s_digit_h, GColorBlack);
+    text_layer_set_text_color(s_forecast_layer, GColorBlack);
 #endif
   } else if(hour >= 12) {
 	  text_layer_set_text(s_ampm_layer, " ");
@@ -133,6 +140,7 @@ static void update_time() {
 		text_layer_set_text_color(s_temp_layer, GColorWhite);
     text_layer_set_text_color(s_digit_h, GColorWhite);
 		text_layer_set_text_color(s_weather_layer, GColorWhite);
+    text_layer_set_text_color(s_forecast_layer, GColorWhite);
 #else
 	  window_set_background_color(s_main_window, GColorWhite);
 	  text_layer_set_text_color(s_ampm_layer, GColorBlack);
@@ -141,6 +149,7 @@ static void update_time() {
 		text_layer_set_text_color(s_temp_layer, GColorBlack);
 		text_layer_set_text_color(s_weather_layer, GColorBlack);
     text_layer_set_text_color(s_digit_h, GColorBlack);
+    text_layer_set_text_color(s_forecast_layer, GColorBlack);
 #endif
   } else if(hour >= 9) {
 	  text_layer_set_text(s_ampm_layer, "late");
@@ -153,6 +162,7 @@ static void update_time() {
 		text_layer_set_text_color(s_temp_layer, GColorWhite);
 		text_layer_set_text_color(s_weather_layer, GColorWhite);
     text_layer_set_text_color(s_digit_h, GColorWhite);
+    text_layer_set_text_color(s_forecast_layer, GColorWhite);
 #else
 	  window_set_background_color(s_main_window, GColorWhite);
 	  text_layer_set_text_color(s_ampm_layer, GColorBlack);
@@ -161,6 +171,7 @@ static void update_time() {
 		text_layer_set_text_color(s_temp_layer, GColorBlack);
 		text_layer_set_text_color(s_weather_layer, GColorBlack);
     text_layer_set_text_color(s_digit_h, GColorBlack);
+    text_layer_set_text_color(s_forecast_layer, GColorBlack);
 #endif
   } else if(hour >= 6) {
 	  text_layer_set_text(s_ampm_layer, " ");
@@ -173,6 +184,7 @@ static void update_time() {
 		text_layer_set_text_color(s_temp_layer, GColorWhite);
 		text_layer_set_text_color(s_weather_layer, GColorWhite);
     text_layer_set_text_color(s_digit_h, GColorWhite);
+    text_layer_set_text_color(s_forecast_layer, GColorWhite);
 #else
 	  window_set_background_color(s_main_window, GColorWhite);
 	  text_layer_set_text_color(s_ampm_layer, GColorBlack);
@@ -181,6 +193,7 @@ static void update_time() {
 		text_layer_set_text_color(s_temp_layer, GColorBlack);
 		text_layer_set_text_color(s_weather_layer, GColorBlack);
     text_layer_set_text_color(s_digit_h, GColorBlack);
+    text_layer_set_text_color(s_forecast_layer, GColorBlack);
 #endif
   } else if(hour >= 3) {
 	  text_layer_set_text(s_ampm_layer, "early");
@@ -193,6 +206,7 @@ static void update_time() {
 		text_layer_set_text_color(s_temp_layer, GColorWhite);
 		text_layer_set_text_color(s_weather_layer, GColorWhite);
     text_layer_set_text_color(s_digit_h, GColorWhite);
+    text_layer_set_text_color(s_forecast_layer, GColorWhite);
 #else
 	  window_set_background_color(s_main_window, GColorBlack);
 	  text_layer_set_text_color(s_ampm_layer, GColorWhite);
@@ -201,6 +215,7 @@ static void update_time() {
 		text_layer_set_text_color(s_temp_layer, GColorWhite);
 		text_layer_set_text_color(s_weather_layer, GColorWhite);
     text_layer_set_text_color(s_digit_h, GColorWhite);
+    text_layer_set_text_color(s_forecast_layer, GColorWhite);
 #endif
   } else if(hour >= 0) {
 	  text_layer_set_text(s_ampm_layer, " ");
@@ -213,6 +228,7 @@ static void update_time() {
 		text_layer_set_text_color(s_temp_layer, GColorWhite);
 		text_layer_set_text_color(s_weather_layer, GColorWhite);
     text_layer_set_text_color(s_digit_h, GColorWhite);
+    text_layer_set_text_color(s_forecast_layer, GColorWhite);
 #else
 	  window_set_background_color(s_main_window, GColorBlack);
 	  text_layer_set_text_color(s_ampm_layer, GColorWhite);
@@ -221,6 +237,7 @@ static void update_time() {
 		text_layer_set_text_color(s_temp_layer, GColorWhite);
 		text_layer_set_text_color(s_weather_layer, GColorWhite);
     text_layer_set_text_color(s_digit_h, GColorWhite);
+    text_layer_set_text_color(s_forecast_layer, GColorWhite);
 #endif
   } else {
 	  text_layer_set_text(s_ampm_layer, "error");
@@ -233,6 +250,7 @@ static void update_time() {
 		text_layer_set_text_color(s_temp_layer, GColorWhite);
 		text_layer_set_text_color(s_weather_layer, GColorWhite);
     text_layer_set_text_color(s_digit_h, GColorWhite);
+    text_layer_set_text_color(s_forecast_layer, GColorWhite);
 #else
 	  window_set_background_color(s_main_window, GColorWhite);
 	  text_layer_set_text_color(s_ampm_layer, GColorBlack);
@@ -241,6 +259,7 @@ static void update_time() {
 		text_layer_set_text_color(s_temp_layer, GColorBlack);
 		text_layer_set_text_color(s_weather_layer, GColorBlack);
     text_layer_set_text_color(s_digit_h, GColorBlack);
+    text_layer_set_text_color(s_forecast_layer, GColorBlack);
 #endif
   }
 
@@ -320,6 +339,15 @@ static void tap_handler(AccelAxisType axis, int32_t direction) {
   GRect start5 = GRect(0,30,141,168);
   GRect finish5 = GRect(288,30,141,168);
   animate_layer(text_layer_get_layer(s_digit_h), &start5, &finish5, 1000, 7000);
+  
+  //Forecast move in from right
+  GRect start6 = GRect(288,45,141,168);
+  GRect finish6 = GRect(0,45,141,168);
+  animate_layer(text_layer_get_layer(s_forecast_layer), &start6, &finish6, 1000, 0);
+  
+  GRect start7 = GRect(0,45,141,168);
+  GRect finish7 = GRect(288,45,141,168);
+  animate_layer(text_layer_get_layer(s_forecast_layer), &start7, &finish7, 1000, 7000);
 }
 
 static void battery_handler(BatteryChargeState state) {
@@ -433,6 +461,8 @@ static void main_window_load(Window *window) {
 	s_date_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_CYNTHE_22));
 	s_temp_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_CYNTHE_18));
 	s_weather_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_CYNTHE_14));
+  s_forecast_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_CYNTHE_14));
+  s_digit_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_CYNTHE_14));
 
 	batt_layer = layer_create(GRect(-5, 0, 144, 168));
 	layer_add_child(window_get_root_layer(window), batt_layer);
@@ -470,10 +500,20 @@ static void main_window_load(Window *window) {
 	layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_weather_layer));
 	text_layer_set_text(s_weather_layer, "Weather");
   
+  //Hour layer
   s_digit_h = text_layer_create(GRect(288,30,141,168));
   text_layer_set_background_color(s_digit_h, GColorClear);
+  text_layer_set_font(s_digit_h, s_digit_font);
   text_layer_set_text_alignment(s_digit_h, GTextAlignmentRight);
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_digit_h));  
+  
+  //Forecast layer
+  s_forecast_layer = text_layer_create(GRect(288,45,141,168));
+  text_layer_set_background_color(s_forecast_layer, GColorClear);
+  text_layer_set_font(s_forecast_layer, s_forecast_font);
+  text_layer_set_text_alignment(s_forecast_layer, GTextAlignmentRight);
+  layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_forecast_layer));
+  text_layer_set_text(s_forecast_layer, "Updating Forecast");
 
 	update_time();
 }
@@ -483,6 +523,7 @@ static void main_window_unload(Window *window) {
 	text_layer_destroy(s_ampm_layer);
 	text_layer_destroy(s_date_layer);
   text_layer_destroy(s_digit_h);
+  text_layer_destroy(s_forecast_layer);
 	fonts_unload_custom_font(s_time_font);
 	fonts_unload_custom_font(s_date_font);
 	layer_destroy(batt_layer);
@@ -497,6 +538,7 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 	static char temperature_buffer[25];
 	static char temperaturec_buffer[25];
 	static char conditions_buffer[100];
+  static char forecast_buffer[100];
 	
 	// Read first item
   Tuple *t = dict_read_first(iterator);
@@ -538,6 +580,9 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 		case KEY_CONDITIONS:
  		 	snprintf(conditions_buffer, sizeof(conditions_buffer), "%s", t->value->cstring);
  		break;
+    case KEY_FORECASTC:
+      snprintf(forecast_buffer, sizeof(forecast_buffer), "Next: %s", t->value->cstring);
+    break;
 		default:
  		 APP_LOG(APP_LOG_LEVEL_ERROR, "Key %d not recognized!", (int)t->key);
  		 break;
@@ -548,6 +593,8 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
   }
 	// Set text for conditions
 	text_layer_set_text(s_weather_layer, conditions_buffer);
+  // Set text for forecast
+  text_layer_set_text(s_forecast_layer, forecast_buffer);
 	// Set text for temperature
 	bool scale = persist_read_bool(KEY_SCALE);
 	if(scale == false) {
@@ -562,12 +609,14 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 static void inbox_dropped_callback(AppMessageResult reason, void *context) {
   APP_LOG(APP_LOG_LEVEL_ERROR, "Message dropped!");
 	text_layer_set_text(s_weather_layer, "Update Failed");
+  text_layer_set_text(s_forecast_layer, "Update Failed");
 	text_layer_set_text(s_temp_layer, "Update Failed");
 }
 
 static void outbox_failed_callback(DictionaryIterator *iterator, AppMessageResult reason, void *context) {
   APP_LOG(APP_LOG_LEVEL_ERROR, "Outbox send failed!");
 	text_layer_set_text(s_weather_layer, "Update Failed"); // No BT, Internet
+  text_layer_set_text(s_forecast_layer, "Update Failed");
 	text_layer_set_text(s_temp_layer, "Update Failed");
 }
 

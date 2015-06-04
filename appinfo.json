@@ -2,6 +2,7 @@
     "appKeys": {
         "KEY_CONDITIONS": 0,
         "KEY_CONDITIONSH": 6,
+        "KEY_FORECASTC": 7,
         "KEY_SCALE": 3,
         "KEY_TEMPERATURE": 1,
         "KEY_TEMPERATUREC": 2,

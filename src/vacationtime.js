@@ -12,12 +12,13 @@ function locationSuccess(pos) {
 	//var url = 'https://api.forecast.io/forecast/apikey/' + 
 	//pos.coords.latitude + ',' + pos.coords.longitude;
 	
-  var url = 'http://api.openweathermap.org/data/2.5/weather?Lat='+pos.coords.latitude +'&Lon=' + pos.coords.longitude;
+  
+  var url = 'http://api.openweathermap.org/data/2.5/forecast?Lat='+pos.coords.latitude +'&Lon=' + pos.coords.longitude +'&mode=json';
   
 	console.log("Lat is " + pos.coords.latitude);
 	console.log("Lon is " + pos.coords.longitude);
 
-  // Send request to forecast.io
+  // Send request to openweathermap.org
   xhrRequest(url, 'GET', 
     function(responseText) {
       // responseText contains a JSON object with weather info
@@ -28,7 +29,7 @@ function locationSuccess(pos) {
       //var temperature = Math.round(json.currently.apparentTemperature); // ((json.currently.temperature-32)*5)/9
       //console.log("Temperature is " + temperature);
 			
-      var temperature = Math.round((json.main.temp - 273.15));
+      var temperature = Math.round((json.list[0].main.temp - 273.15));
       console.log("Temperature is " + temperature);
       
       
@@ -40,13 +41,16 @@ function locationSuccess(pos) {
       //var conditions = json.minutely.summary;      
       //console.log("Conditions are " + conditions);
 			// Conditions
-      var conditions = json.weather[0].description;
+      var conditions = json.list[0].weather[0].description;
       console.log("Conditions are " + conditions);
       
+      var forecast = json.list[1].weather[0].description;
+      console.log ("Forecast is " + forecast);
       // Assemble dictionary using our keys
       var dictionary = {
         "KEY_TEMPERATURE": temperature,
         "KEY_CONDITIONS": conditions,
+        "KEY_FORECASTC": forecast,
 				//"KEY_TEMPERATUREC": temperaturec,
       };
 
