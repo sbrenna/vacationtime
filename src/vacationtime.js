@@ -9,9 +9,11 @@ var xhrRequest = function (url, type, callback) {
 
 function locationSuccess(pos) {
   // Construct URL
-	var url = 'https://api.forecast.io/forecast/apikey/' + 
-	pos.coords.latitude + ',' + pos.coords.longitude;
+	//var url = 'https://api.forecast.io/forecast/apikey/' + 
+	//pos.coords.latitude + ',' + pos.coords.longitude;
 	
+  var url = 'http://api.openweathermap.org/data/2.5/weather?Lat='+pos.coords.latitude +'&Lon=' + pos.coords.longitude;
+  
 	console.log("Lat is " + pos.coords.latitude);
 	console.log("Lon is " + pos.coords.longitude);
 
@@ -20,24 +22,30 @@ function locationSuccess(pos) {
     function(responseText) {
       // responseText contains a JSON object with weather info
       var json = JSON.parse(responseText);
-			console.log(JSON.parse(responseText));
+			//console.log("responsetext is " + json);
 
       // °F to °C
-      var temperature = Math.round(json.currently.apparentTemperature); // ((json.currently.temperature-32)*5)/9
-      console.log("Temperature is " + temperature);
+      //var temperature = Math.round(json.currently.apparentTemperature); // ((json.currently.temperature-32)*5)/9
+      //console.log("Temperature is " + temperature);
 			
-			var temperaturec = Math.round((json.currently.apparentTemperature - 32) * 5/9);
-			console.log("Temperature in C is " + temperaturec);
+      var temperature = Math.round((json.main.temp - 273.15));
+      console.log("Temperature is " + temperature);
+      
+			//var temperaturec = Math.round((json.currently.apparentTemperature - 32) * 5/9);
+			//console.log("Temperature in C is " + temperaturec);
 
       // Conditions
-      var conditions = json.minutely.summary;      
+      //var conditions = json.minutely.summary;      
+      //console.log("Conditions are " + conditions);
+			// Conditions
+      var conditions = json.weather[0].description;
       console.log("Conditions are " + conditions);
-			
+      
       // Assemble dictionary using our keys
       var dictionary = {
         "KEY_TEMPERATURE": temperature,
         "KEY_CONDITIONS": conditions,
-				"KEY_TEMPERATUREC": temperaturec,
+				//"KEY_TEMPERATUREC": temperaturec,
       };
 
       // Send to Pebble

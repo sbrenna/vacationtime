@@ -12,19 +12,20 @@
         "location",
         "configurable"
     ],
-    "companyName": "Turner Vink",
-    "longName": "Vacation Time",
+    "companyName": "Turner Vink & Sergio Brenna",
+    "longName": "My Vacation Time",
     "projectType": "native",
     "resources": {
         "media": [
             {
-                "file": "fonts/cynthe.ttf",
-                "name": "FONT_CYNTHE_14",
-                "type": "font"
+                "file": "images/mywatch.png",
+                "menuIcon": true,
+                "name": "SCREENSHOT",
+                "type": "png"
             },
             {
                 "file": "fonts/cynthe.ttf",
-                "name": "FONT_CYNTHE_25",
+                "name": "FONT_CYNTHE_18",
                 "type": "font"
             },
             {
@@ -34,19 +35,21 @@
             },
             {
                 "file": "fonts/cynthe.ttf",
-                "name": "FONT_CYNTHE_18",
+                "name": "FONT_CYNTHE_25",
+                "type": "font"
+            },
+            {
+                "file": "fonts/cynthe.ttf",
+                "name": "FONT_CYNTHE_14",
                 "type": "font"
             }
         ]
     },
-    "sdkVersion": "3",
+    "sdkVersion": "2",
     "shortName": "Vacation",
-    "targetPlatforms": [
-        "aplite",
-        "basalt"
-    ],
     "uuid": "cd8dcffe-df20-4306-99e8-ddd817d0bf67",
-    "versionLabel": "1.0",
+    "versionCode": 1,
+    "versionLabel": "2.02",
     "watchapp": {
         "watchface": true
     }
