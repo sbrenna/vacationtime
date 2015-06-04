@@ -274,12 +274,12 @@ static void tap_handler(AccelAxisType axis, int32_t direction) {
   time_t temp = time(NULL);
   struct tm *tick_time = localtime(&temp);
   
-  int hour = tick_time->tm_hour;
   digit_h_1 = tick_time->tm_hour/10;
   digit_h_2 = tick_time->tm_hour%10;
   digit_m_1 = tick_time->tm_min/10;
   digit_m_2 = tick_time->tm_min%10;
-  //int min = tick_time->tm_min;
+  
+  // Convert int to char
   snprintf(hour_buffer, sizeof(hour_buffer), "%d%d:%d%d", (int)digit_h_1, (int)digit_h_2, (int)digit_m_1, (int)digit_m_2);
   
   // Set text for hour and minutes
