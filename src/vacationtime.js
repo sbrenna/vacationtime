@@ -31,6 +31,8 @@ function locationSuccess(pos) {
       var temperature = Math.round((json.main.temp - 273.15));
       console.log("Temperature is " + temperature);
       
+      
+      
 			//var temperaturec = Math.round((json.currently.apparentTemperature - 32) * 5/9);
 			//console.log("Temperature in C is " + temperaturec);
 
