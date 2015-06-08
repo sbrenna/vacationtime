@@ -52,15 +52,6 @@ static void update_time() {
   struct tm *tick_time = localtime(&temp);
   
   int hour = tick_time->tm_hour;
-  /*digit_h_1 = tick_time->tm_hour/10;
-  digit_h_2 = tick_time->tm_hour%10;
-  digit_m_1 = tick_time->tm_min/10;
-  digit_m_2 = tick_time->tm_min%10;
-  //int min = tick_time->tm_min;
-  snprintf(hour_buffer, sizeof(hour_buffer), "%d%d:%d%d", (int)digit_h_1, (int)digit_h_2, (int)digit_m_1, (int)digit_m_2);
-  
-  // Set text for hour and minutes
-	text_layer_set_text(s_digit_h, hour_buffer);*/
 
   
   if(hour >= 21) {
@@ -526,6 +517,8 @@ static void main_window_unload(Window *window) {
   text_layer_destroy(s_forecast_layer);
 	fonts_unload_custom_font(s_time_font);
 	fonts_unload_custom_font(s_date_font);
+  fonts_unload_custom_font(s_digit_font);
+  fonts_unload_custom_font(s_forecast_font);
 	layer_destroy(batt_layer);
 }
 
